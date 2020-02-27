@@ -1,6 +1,6 @@
 # Wall Street Stock Data Analysis Using VBA
 
-![stock Market](Images/stockmarket.jpg)
+![stock Market](images/stockmarket.jpg)
 
 ## Project Goal:
 
