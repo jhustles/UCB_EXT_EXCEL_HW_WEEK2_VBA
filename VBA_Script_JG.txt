@@ -60,6 +60,7 @@ Sub Analysis_1()
 End Sub
 
 
+
 Sub Analysis_2()
 
     'Performed:
@@ -74,20 +75,20 @@ Sub Analysis_2()
     
 'Set up the loops thru all WORKSHEETS
     For Each ws In Worksheets
-
-    'Declare all variables and define them
+        
+        'Declare all variables and define them
         Dim Ticker As String
         Dim TotalOpenPrice As Double
         Dim TotalClosePrice As Double
         Dim Yearly_Change As Double
         Dim Percent_Change As Double
-
+        
         'define the variables within each wksht
         TotalStkVol = 0
         TotalOpenPrice = 0
         TotalClosePrice = 0
         Yearly_Change = TotalClosePrice - TotalOpenPrice
-
+        
         Dim SummaryTableTick2 As Integer
         SummaryTableTick2 = 2
         
@@ -96,7 +97,7 @@ Sub Analysis_2()
         ws.Cells(1, 10).Value = "Yearly Change"
         ws.Cells(1, 11).Value = "Percent Change"
         ws.Cells(1, 12).Value = "Total Stock Volume"
-
+        
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
         
         'setting up the for loop and conditionals
@@ -113,8 +114,8 @@ Sub Analysis_2()
                 TotalClosePrice = TotalClosePrice + ws.Cells(Row, 6).Value
                 TotalYearlyChange = (TotalClosePrice - TotalOpenPrice)
                 TotalStkVol = TotalStkVol + ws.Cells(Row, 7).Value
-
-    'Print Ticker Name in the Summary Table
+                
+                'Print Ticker Name in the Summary Table
                 ws.Range("I" & SummaryTableTick2).Value = Ticker
                 
                 'Print "YEARLY CHANGE" to Summary Table
@@ -141,8 +142,9 @@ Sub Analysis_2()
                         'Change format for Total Percentage Change to Percent style
                         ws.Range("K" & SummaryTableTick2).Style = "Percent"
                     End If
-
-                    'Print the TotalStkVol to the Summary Table
+                    
+                   
+                'Print the TotalStkVol to the Summary Table
                 ws.Range("L" & SummaryTableTick2).Value = TotalStkVol
                 
                 'add one to the summary table row
@@ -165,6 +167,8 @@ Sub Analysis_2()
     Next ws
     
 End Sub
+
+
 
 Sub Analysis_3()
 
@@ -200,8 +204,7 @@ Sub Analysis_3()
         
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
 
-
-         'setting up the for loop and conditionals
+        'setting up the for loop and conditionals
         For Row = 2 To lastrow
         
             If ws.Cells(Row + 1, 1).Value <> ws.Cells(Row, 1).Value Then
@@ -218,7 +221,7 @@ Sub Analysis_3()
                 
                 'Print Ticker Name in the Summary Table
                 ws.Range("I" & SummaryTableTick2).Value = Ticker
-
+                
                 'Print "YEARLY CHANGE" to Summary Table
                 ws.Range("J" & SummaryTableTick2).Value = TotalYearlyChange
                 
@@ -243,3 +246,81 @@ Sub Analysis_3()
                         'Change format for Total Percentage Change to Percent style
                         ws.Range("K" & SummaryTableTick2).Style = "Percent"
                     End If
+                    
+                   
+                'Print the TotalStkVol to the Summary Table
+                ws.Range("L" & SummaryTableTick2).Value = TotalStkVol
+                
+                'add one to the summary table row
+                SummaryTableTick2 = SummaryTableTick2 + 1
+                
+                'reset the TotalStkVol back to zero
+                TotalStkVol = 0
+                
+            'Else the tickers from one cell below to the cell above are equal, then continue
+            'to sum up the following:
+            Else
+                TotalOpenPrice = TotalOpenPrice + ws.Cells(Row, 3).Value
+                TotalClosePrice = TotalClosePrice + ws.Cells(Row, 6).Value
+                TotalStkVol = TotalStkVol + ws.Cells(Row, 7).Value
+                
+            End If
+        
+        Next Row
+            
+         'set up SummaryTableGreatest
+        'Dim SummaryTableGreatest As Integer
+        'SummaryTableGreatest = 2
+        
+        ws.Cells(1, 16).Value = "Ticker"
+        ws.Cells(1, 17).Value = "Value"
+        ws.Cells(2, 15).Value = "Greatest % Increase"
+        ws.Cells(3, 15).Value = "Greatest % Decrease"
+        ws.Cells(4, 15).Value = "Greatest Total Volume"
+        
+        'define the max and min variables for the percent change
+        Dim Max As Double
+        Dim Min As Double
+
+        Max = Application.WorksheetFunction.Max(ws.Columns(11))
+        Min = Application.WorksheetFunction.Min(ws.Columns(11))
+       
+        
+        lastrowPercent = ws.Cells(Rows.Count, 11).End(xlUp).Row
+
+        'new loop for returning greatest % increase and decrease
+        'and total vol
+        For row2 = 2 To lastrowPercent
+                
+                'set up max function for percentage change
+                If (ws.Cells(row2, 11).Value = Max) Then
+                    ws.Cells(2, 16).Value = ws.Cells(row2, 9).Value
+                    ws.Cells(2, 17).Value = Max
+                    ws.Cells(2, 17).Style = "Percent"
+                
+                'set up min function for percentage change
+                ElseIf (ws.Cells(row2, 11).Value = Min) Then
+                    ws.Cells(3, 16).Value = ws.Cells(row2, 9).Value
+                    ws.Cells(3, 17).Value = Min
+                    ws.Cells(3, 17).Style = "Percent"
+                
+                End If
+        Next row2
+                    
+                    
+         MaxTotalVol = Application.WorksheetFunction.Max(ws.Columns(12))
+         lastrowMaxVol = ws.Cells(Rows.Count, 12).End(xlUp).Row
+         
+        'Start a new loop for TotalMaxVolume
+        For row3 = 2 To lastrowMaxVol
+                 
+            If (ws.Cells(row3, 12).Value = MaxTotalVol) Then
+                ws.Cells(4, 16).Value = ws.Cells(row3, 9).Value
+                ws.Cells(4, 17).Value = ws.Cells(row3, 12).Value
+            End If
+                 
+        Next row3
+            
+    Next ws
+    
+End Sub
