@@ -113,3 +113,31 @@ Sub Analysis_2()
                 TotalClosePrice = TotalClosePrice + ws.Cells(Row, 6).Value
                 TotalYearlyChange = (TotalClosePrice - TotalOpenPrice)
                 TotalStkVol = TotalStkVol + ws.Cells(Row, 7).Value
+
+    'Print Ticker Name in the Summary Table
+                ws.Range("I" & SummaryTableTick2).Value = Ticker
+                
+                'Print "YEARLY CHANGE" to Summary Table
+                ws.Range("J" & SummaryTableTick2).Value = TotalYearlyChange
+                
+                    'setting up condition that if the total yearly change is positive color the interior green
+                    'otherwise if negative, color the interior red
+                    If (TotalYearlyChange > 0) Then
+                        ws.Range("J" & SummaryTableTick2).Interior.ColorIndex = 4
+                    ElseIf (TotalYearlyChange = 0) Then
+                        ws.Range("J" & SummaryTableTick2).Interior.ColorIndex = 2
+                    Else
+                        ws.Range("J" & SummaryTableTick2).Interior.ColorIndex = 3
+                    End If
+                    
+                    'Total PERCENT CHANGE - Need to account for If TotalYearlyChange = 0 (will cause an error)
+                    If (TotalYearlyChange = 0) Then
+                        ws.Range("K" & SummaryTableTick2).Value = 0
+                    Else
+                    
+                      'Print "Percent Change" to Summary Table = (totalcloseprice - totalopenprice)/ totalopenprice)
+                        ws.Range("K" & SummaryTableTick2).Value = TotalYearlyChange / TotalOpenPrice
+                        
+                        'Change format for Total Percentage Change to Percent style
+                        ws.Range("K" & SummaryTableTick2).Style = "Percent"
+                    End If
