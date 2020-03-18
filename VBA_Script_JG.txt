@@ -81,3 +81,9 @@ Sub Analysis_2()
         Dim TotalClosePrice As Double
         Dim Yearly_Change As Double
         Dim Percent_Change As Double
+
+        'define the variables within each wksht
+        TotalStkVol = 0
+        TotalOpenPrice = 0
+        TotalClosePrice = 0
+        Yearly_Change = TotalClosePrice - TotalOpenPrice
