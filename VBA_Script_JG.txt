@@ -166,3 +166,36 @@ Sub Analysis_2()
     
 End Sub
 
+Sub Analysis_3()
+
+'Performed: locate the stock with the: "Greatest % increase", "Greatest % Decrease" and "Greatest total volume"
+
+
+'Set up the loops thru all WORKSHEETS
+    For Each ws In Worksheets
+        
+        'Declare all variables and define them
+        Dim Ticker As String
+        Dim TotalOpenPrice As Double
+        Dim TotalClosePrice As Double
+        Dim Yearly_Change As Double
+        Dim Percent_Change As Double
+        
+        
+        
+        'define the variables within each wksht
+        TotalStkVol = 0
+        TotalOpenPrice = 0
+        TotalClosePrice = 0
+        Yearly_Change = TotalClosePrice - TotalOpenPrice
+        
+        Dim SummaryTableTick2 As Integer
+        SummaryTableTick2 = 2
+        
+        'Set up SummaryTableTick2
+        ws.Cells(1, 9).Value = "Ticker Symbol"
+        ws.Cells(1, 10).Value = "Yearly Change"
+        ws.Cells(1, 11).Value = "Percent Change"
+        ws.Cells(1, 12).Value = "Total Stock Volume"
+        
+        lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
