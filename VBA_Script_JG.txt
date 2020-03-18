@@ -141,3 +141,28 @@ Sub Analysis_2()
                         'Change format for Total Percentage Change to Percent style
                         ws.Range("K" & SummaryTableTick2).Style = "Percent"
                     End If
+
+                    'Print the TotalStkVol to the Summary Table
+                ws.Range("L" & SummaryTableTick2).Value = TotalStkVol
+                
+                'add one to the summary table row
+                SummaryTableTick2 = SummaryTableTick2 + 1
+                
+                'reset the TotalStkVol back to zero
+                TotalStkVol = 0
+                
+            'Else the tickers from one cell below to the cell above are equal, then continue
+            'to sum up the following:
+            Else
+                TotalOpenPrice = TotalOpenPrice + ws.Cells(Row, 3).Value
+                TotalClosePrice = TotalClosePrice + ws.Cells(Row, 6).Value
+                TotalStkVol = TotalStkVol + ws.Cells(Row, 7).Value
+                
+            End If
+        
+        Next Row
+        
+    Next ws
+    
+End Sub
+
