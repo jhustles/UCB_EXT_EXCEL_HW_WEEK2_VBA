@@ -87,3 +87,12 @@ Sub Analysis_2()
         TotalOpenPrice = 0
         TotalClosePrice = 0
         Yearly_Change = TotalClosePrice - TotalOpenPrice
+
+        Dim SummaryTableTick2 As Integer
+        SummaryTableTick2 = 2
+        
+        'Set up SummaryTableTick2
+        ws.Cells(1, 9).Value = "Ticker Symbol"
+        ws.Cells(1, 10).Value = "Yearly Change"
+        ws.Cells(1, 11).Value = "Percent Change"
+        ws.Cells(1, 12).Value = "Total Stock Volume"
