@@ -74,3 +74,10 @@ Sub Analysis_2()
     
 'Set up the loops thru all WORKSHEETS
     For Each ws In Worksheets
+
+    'Declare all variables and define them
+        Dim Ticker As String
+        Dim TotalOpenPrice As Double
+        Dim TotalClosePrice As Double
+        Dim Yearly_Change As Double
+        Dim Percent_Change As Double
