@@ -1,19 +1,3 @@
-# Wall Street Stock Data Analysis Using VBA
-
-![stock Market](images/stockmarket.jpg)
-
-## Project Goal:
-
- Using my VBA scripting skills to analyze real stock market data over 2014, 2015, 2016 stock data.
-
-
-## Output Results After Implementing VBA Script
-
-![Screenshot of 2014 Results](images/VBA_2014_Stock_Mkt_Screenshot.JPG)
-
-![Screenshot of 2015 Results](images/VBA_2015_Stock_Mkt_Screenshot.JPG)
-
-![Screenshot of 2016 Results](images/VBA_2016_Stock_Mkt_Screenshot.JPG)
 
 
 ## VBA Script Takes The Actions:
