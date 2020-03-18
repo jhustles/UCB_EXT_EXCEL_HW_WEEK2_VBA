@@ -199,3 +199,22 @@ Sub Analysis_3()
         ws.Cells(1, 12).Value = "Total Stock Volume"
         
         lastrow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+
+         'setting up the for loop and conditionals
+        For Row = 2 To lastrow
+        
+            If ws.Cells(Row + 1, 1).Value <> ws.Cells(Row, 1).Value Then
+                
+                'Set the Ticker Name
+                Ticker = ws.Cells(Row, 1).Value
+                
+                'Add to totals for: TotalOpenPrice, TotalClosePrice, TotalStkVol
+                
+                TotalOpenPrice = TotalOpenPrice + ws.Cells(Row, 3).Value
+                TotalClosePrice = TotalClosePrice + ws.Cells(Row, 6).Value
+                TotalYearlyChange = (TotalClosePrice - TotalOpenPrice)
+                TotalStkVol = TotalStkVol + ws.Cells(Row, 7).Value
+                
+                'Print Ticker Name in the Summary Table
+                ws.Range("I" & SummaryTableTick2).Value = Ticker
